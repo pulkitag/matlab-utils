@@ -1,0 +1,12 @@
+## Mex Functions ##
+extract_patches.cpp
+Extracts patches of sz: patchSz*patchSz from the given 3D image and locations "loc" (top-left corner)
+patches = extract_patches(im,loc,patchSz,nThread)
+
+pool_vol.cpp
+Pools over patchSz*patchSz region at intervals of stepSz
+[patches,loc,maxPoolVal,maxLoc] = extract_patches(im,patchSz,stepSz,nThreads);
+patches   : All extraced patches
+loc       : Locations of these patches (patch-centers)
+maxPoolVal: Maximum value within any pooling region.
+maxLoc    : Location "in the image" which corresponds to maxPoolVal for each patch
