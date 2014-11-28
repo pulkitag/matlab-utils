@@ -1,6 +1,8 @@
 function [out] = add_toolbox(toolName)
 
-pkg_path = '/work4/pulkitag-code/pkgs/';
+cnfg = get_myutils_config()
+
+pkg_path = cnfg.paths.toolPkgs;
 pkg_path_2 = '/work4/pulkitag/code/';
 codePath = '/home/eecs/pulkitag/Research/codes/codes/';
 my_pkg_path = '/home/eecs/pulkitag/Research/codes/codes/myutils/Matlab/my_pkgs/';
@@ -16,7 +18,7 @@ switch toolName
 	
 	case 'vlfeat'
 		addpath(fullfile(pkg_path,'vlfeat','/vlfeat-0.9.18/toolbox/'));
-        vl_setup;
+		vl_setup;
 		disp('Added vlfeat');
         
     case 'libsvm'
@@ -40,7 +42,11 @@ switch toolName
 		disp('LabelMe Added');
 
 	case 'voc_2007'
+<<<<<<< HEAD
 		addpath(strcat(pkg_path,'rcnn-cachedir/VOC2007/VOCdevkit/VOCcode'));
+=======
+		addpath(strcat(pkg_path,'VOCdevkit_2007/VOCdevkit/VOCcode'));
+>>>>>>> abee7901aceee8cebf641e20dc41f3df05459b39
         disp('VOC_2007 Code added');
         
     case 'voc_code'
@@ -118,7 +124,6 @@ switch toolName
 
 end
 
-	
 out=1;
 end
 

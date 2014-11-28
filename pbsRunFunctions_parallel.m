@@ -47,9 +47,9 @@ fprintf(fid, 'echo This job has allocated $NPROCS cpus \n');
 fprintf(fid, 'echo This job is the $PBS_ARRAYID th function \n');
 fprintf(fid, '\n');
 if(isSingleComp)
-    matlabString = 'env LD_PRELOAD=/lib/libgcc_s.so.1:/usr/lib/libstdc++.so.6 /usr/sww/pkg/matlab-r2011a/bin/matlab -singleCompThread -nodisplay -r ';
+    matlabString = 'env LD_PRELOAD=/lib/libgcc_s.so.1:/usr/lib/libstdc++.so.6 /usr/sww/pkg/matlab-r2012b/bin/matlab -singleCompThread -nodisplay -r ';
 else
-    matlabString = 'env LD_PRELOAD=/lib/libgcc_s.so.1:/usr/lib/libstdc++.so.6 /usr/sww/pkg/matlab-r2011a/bin/matlab -nodisplay -r ';
+    matlabString = 'env LD_PRELOAD=/lib/libgcc_s.so.1:/usr/lib/libstdc++.so.6 /usr/sww/pkg/matlab-r2012b/bin/matlab -nodisplay -r ';
 end
 if(length(matF) > 0)
     fprintf(fid, ['if [ $PBS_ARRAYID = 1 ]; then \n']);

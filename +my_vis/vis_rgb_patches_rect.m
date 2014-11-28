@@ -1,8 +1,6 @@
-function [varargout] = vis_rgb_patches(patches,varargin)
+function [varargout] = vis_rgb_patches_rect(patches,imRows,imCols,varargin)
 %patches are dims*numPatches where 1:dims/3 contain nx, dims/3+1:2dims/3: ny and so on.
 
-dfs = {'fig',[],'headless',false};
-dfs = get_defaults(varargin,dfs,true);
 assert(mod(size(patches,1),3)==0,'Normal patches should have 3 channels corr to nx,ny,nz');
 
 normals = cell(3,1);
@@ -32,9 +30,11 @@ for i=1:1:numPatches
 	V{i} = N;
 end
 
-nr = ceil(sqrt(numPatches));
+nr = imRows;
+nc = imCols;
 nrIm = nr*patchSz + (nr-1); % One pixel space between consequent patches
-im = zeros(nrIm,nrIm,3,'single');
+ncIm = nc*patchSz + (nc-1); % One pixel space between consequent patches
+im = zeros(nrIm,ncIm,3,'single');
 count = 0;
 r = 1;
 c = 1;
@@ -42,27 +42,19 @@ for i=1:1:numPatches
 	im(r:r+patchSz-1,c:c+patchSz-1,:) = V{i};
 	c = c + patchSz + 1;
 	count = count + 1;
-	if count >= nr
+	if count >= nc
 		c = 1;
 		r = r + patchSz + 1;
 		count = 0;
 	end
 end
-
-varargout{1} = im;
-if isempty(dfs.fig)
-	if dfs.headless
-		fig = figure('visible','off');
-	else
-		fig = figure();
-	end
-else
-	fig = dfs.fig
+varargout{1} = [];
+if isempty(varargin)
+	fig = figure();
+	imagesc(im);
+	varargout{1} = fig;
+elseif ~varargin{1}
+	varargout{1} = im;
 end
 
-%imagesc(im);
-image(im);
-set(gca,'XTick',[]);
-set(gca,'YTick',[]);
-varargout{2} = fig;
 end

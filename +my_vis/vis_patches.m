@@ -2,6 +2,9 @@ function [varargout] = vis_patches(patches,varargin)
 %patches: patchDims*numPatches
 %patchDIms should be a perfect square - ie.e we assume square patches
 
+dfs = {'headless',false};
+dfs = get_defaults(varargin, dfs, true);
+
 [patchDim,N] = size(patches);
 patchSz = floor(sqrt(patchDim));
 assert(patchSz*patchSz == patchDim,'patches are not square');
@@ -30,11 +33,13 @@ for i=1:1:N
 		count = 0;
 	end
 end
-varargout{1} = [];
-if isempty(varargin)
-	imshow(im);
-elseif ~varargin{1}
-	varargout{1} = im;
-end
-
+varargout{1} = im;
+if dfs.headless
+	fig = figure('visible','off');
+else
+	fig = figure();
+end	
+imagesc(im);
+colormap('gray');
+varargout{2} = fig;
 end

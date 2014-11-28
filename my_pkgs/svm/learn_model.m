@@ -31,7 +31,8 @@ if prms.isValProvided
 	testMat    = varargin{1};
 	testLabels  = varargin{2};
 	trainMat    = featMat;
-	trainLabels    = gtLabels;
+	trainLabels  = gtLabels;
+	assert(size(trainMat,2)==size(testMat,2),'Dimension Mismatch');
 
 	if(isHomkerMap)
 		disp('Applying HomkerMap');
@@ -143,6 +144,10 @@ disp(sprintf('Max Accuracy of %f at c: %f',maxAcc,cRange(maxAccIdx)));
 %%%%%%%%%%%%%%%%% Final Training %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('Final training..');
 trainParam = sprintf(trainStr,cRange(maxAccIdx));
+if prms.isValProvided
+	featMat = cat(1,featMat,varargin{1});
+	gtLabels = cat(1,gtLabels,varargin{2});
+end
 if(isHomkerMap)
     featMat = vl_homkermap(featMat',homkerMapN);
     featMat = featMat';
@@ -150,6 +155,8 @@ end
 featMat = double(featMat);
 assert(all(~isnan(featMat(:))) && all(~isinf(featMat(:))) && all(isreal(featMat(:))),'nans or infs or complex in featMat');
 assert(all(~isnan(gtLabels(:))) && all(~isinf(gtLabels(:))) && all(isreal(gtLabels(:))),'nans or infs or complex in labels');
+
+disp(sprintf('Size of final training features is (%d,%d)',size(featMat)));
 
 modelLogistic = train(gtLabels,featMat,trainParam);
 model.modelPrms =  modelLogistic;

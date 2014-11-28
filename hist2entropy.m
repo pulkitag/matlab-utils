@@ -4,7 +4,7 @@ function entropy = hist2entropy(histogram)
 %}
 
 sumHist = sum(histogram(:));
-entropy = 0;
+entropy = zeros(1,1,class(histogram));
 if sumHist ==0
 	return;
 end
