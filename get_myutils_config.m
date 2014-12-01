@@ -5,7 +5,7 @@ dfs = get_defaults(varargin, dfs, true);
 
 host = get_hostname();
 %keyboard;
-switch host(1:3)
+switch host(1:end-1)
 	case {'vader','anakin','spock','poseidon'}
 		caffeDir = '/work4/pulkitag-code/pkgs/';
 		toolPkgs = '/work4/pulkitag-code/pkgs/';

@@ -1,6 +1,6 @@
 function [out] = add_toolbox(toolName)
 
-cnfg = get_myutils_config()
+cnfg = get_myutils_config();
 
 pkg_path = cnfg.paths.toolPkgs;
 pkg_path_2 = '/work4/pulkitag/code/';
@@ -41,13 +41,9 @@ switch toolName
 		addpath(strcat(pkg_path,'LabelMeToolbox'));
 		disp('LabelMe Added');
 
-	case 'voc_2007'
-<<<<<<< HEAD
-		addpath(strcat(pkg_path,'rcnn-cachedir/VOC2007/VOCdevkit/VOCcode'));
-=======
-		addpath(strcat(pkg_path,'VOCdevkit_2007/VOCdevkit/VOCcode'));
->>>>>>> abee7901aceee8cebf641e20dc41f3df05459b39
-        disp('VOC_2007 Code added');
+		case 'voc_2007'
+			addpath(strcat(pkg_path,'VOCdevkit_2007/VOCdevkit/VOCcode'));
+			disp('VOC_2007 Code added');
         
     case 'voc_code'
 		addpath(strcat(pkg_path,'VOCdevkit/VOCcode'));
