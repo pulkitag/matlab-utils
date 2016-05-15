@@ -98,8 +98,12 @@ switch toolName
 		disp('Pedro Segmentation added');
 
 	case 'piotr'
-		addpath(genpath(fullfile(pkg_path,'piotr')));
+		addpath(genpath(fullfile(pkg_path,'piotr/toolbox-new')));
 		disp('Piotrs Toolbox added');
+
+	case 'piotr_edge'
+		addpath(genpath(fullfile(pkg_path,'edges')));
+		disp('Structured Forest for Edge detection added');
 
 	case 'my_svm'
 		add_toolbox('liblinear');
